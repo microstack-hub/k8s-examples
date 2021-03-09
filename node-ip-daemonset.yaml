@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    app: node-ip
+  name: node-ip
+spec:
+  selector:
+    matchLabels:
+      app: node-ip
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: node-ip
+    spec:
+      containers:
+      - name: ubuntu
+        image: ubuntu
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do hostname; echo $NODE_IP; sleep 10; done;" ]
+        env:
+          - name: NODE_IP
+            valueFrom:
+             fieldRef:
+               fieldPath: status.hostIP
+
