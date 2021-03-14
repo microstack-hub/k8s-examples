@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: haproxy
+  name: haproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: haproxy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: haproxy
+    spec:
+      volumes:
+      - name: config
+        configMap:
+         name: haproxy
+      containers:
+      - image: haproxy:1
+        name: haproxy
+        volumeMounts:
+        - name: config
+          mountPath: /usr/local/etc/haproxy/
