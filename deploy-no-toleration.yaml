@@ -1,0 +1,24 @@
+hapiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: confidential-high
+  name: confidential-high
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: confidential-high
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: confidential-high
+    spec:
+      containers:
+      - image: gcr.io/google_containers/pause:2.0
+        name: pause
+        resources: {}
+status: {}
