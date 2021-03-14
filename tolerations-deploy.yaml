@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tolerations-deploy
+  name: tolerations-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tolerations-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tolerations-deploy
+    spec:
+      containers:
+      - image: k8spatterns/random-generator:1.0
+        name: random-generator
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
